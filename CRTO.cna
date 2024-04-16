@@ -23,6 +23,17 @@ popup beacon_bottom
 		{
 			mkdir(script_resource("Payloads"));
 			mkdir(script_resource("Tools"));
+
+		        // Generate payloads for all available listeners
+		        foreach $listener (listeners()) {
+		            $name = listener_name($listener);
+		            $ext = listener_extension($listener);
+		            $data = artifact_payload($name, $ext, "x64", "process", "None");
+		            $outfile = getFileProper(script_resource("Payloads"), "$name.$ext");
+		            $handle = openf("> $outfile");
+		            writeb($handle, $data);
+		            closef($handle);
+		        }
 		}
 		item "Get Flag"
 		{
