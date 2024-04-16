@@ -16,6 +16,7 @@ Require:
   * SharpUp.exe
   * SharpHound.exe
   * winPEAS.exe
+  * Invoke-NinjaCopy.ps1
 
 Your tree should be like this:
 ```bash
@@ -34,6 +35,7 @@ Your tree should be like this:
 | |____SharpUp.exe
 | |____SharpHound.exe
 | |____winPEAS.exe
+| |____Invoke-NinjaCopy.ps1
 ```
 
 This aggressor script add a new menu on each beacon specific to RTO course:
