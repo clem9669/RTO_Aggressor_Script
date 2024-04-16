@@ -37,33 +37,36 @@ popup beacon_bottom
 					binput($1, "Seatbelt.exe -group=user");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=user");
 				}
-				
 				item "Group : system"
 				{
 					binput($1, "Seatbelt.exe -group=system");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=system");
 				
 				}
-				
 				item "Group : remote"
 				{
 					binput($1, "Seatbelt.exe -group=remote");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=remote");
 				}
-				
 				item "Group : misc"
 				{
 					binput($1, "Seatbelt.exe -group=misc");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=misc");
 				}
-
 				item "Group : all"
 				{
 					binput($1, "Seatbelt.exe -group=all");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=all");
 				}
-
 			}
+			menu "winPEAS"
+			{
+				item "Run winPEAS.exe"
+				{
+					binput($1, "winPEAS.exe");
+					bexecute_assembly($1, script_resource('Tools/winPEAS.exe'), "");
+				}
+                        }
 		}
 		menu "Host Persistence"
 		{
