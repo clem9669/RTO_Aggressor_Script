@@ -14,6 +14,7 @@ Require:
   * SharPersist.exe
   * SharpSCCM.exe
   * SharpUp.exe
+  * SharpHound.exe
 
 Your tree should be like this:
 ```bash
@@ -30,6 +31,7 @@ Your tree should be like this:
 | |____SharPersist.exe
 | |____SharpSCCM.exe
 | |____SharpUp.exe
+| |____SharpHound.exe
 ```
 
 This aggressor script add a new menu on each beacon specific to RTO course:
