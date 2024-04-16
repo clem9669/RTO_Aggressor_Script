@@ -56,6 +56,13 @@ popup beacon_bottom
 					binput($1, "Seatbelt.exe -group=misc");
 					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=misc");
 				}
+
+				item "Group : all"
+				{
+					binput($1, "Seatbelt.exe -group=all");
+					bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), " -group=all");
+				}
+
 			}
 		}
 		menu "Host Persistence"
