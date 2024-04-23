@@ -288,6 +288,12 @@ popup beacon_bottom
 		}
 		menu "Privilege Escalation"
 		{
+
+			item "SharpUp.exe audit"
+			{
+				binput($1, "SharpUp.exe audit");
+				bexecute_assembly($1, script_resource('Tools/SharpUp.exe'), " audit");
+			}
 			item "Unquoted Service Paths"
 			{
 				binput($1, "SharpUp.exe audit UnquotedServicePath");
