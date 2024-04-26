@@ -17,6 +17,7 @@ Require:
   * SharpHound.exe
   * winPEAS.exe
   * Invoke-NinjaCopy.ps1
+  * SharpDPAPI.exe
 
 Your tree should be like this:
 ```bash
