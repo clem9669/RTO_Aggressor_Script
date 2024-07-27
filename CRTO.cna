@@ -574,10 +574,10 @@ popup beacon_bottom
 	            bpowershell_import_clear($1);
 	        }
 	
-	        item "Search *.doc*, *.xls*, *.csv, *.ppt* in shares"
+	        item "Search *.doc*, *.xls*, *.csv, *.ppt*, *.pdf, *.sql in shares"
 	        {
 	            bpowershell_import($1, script_resource("Tools/PowerView.ps1"));
-	            bpowerpick($1, 'Find-InterestingDomainShareFile -Include *.doc*, *.xls*, *.csv, *.ppt*');
+	            bpowerpick($1, 'Find-InterestingDomainShareFile -Include *.doc*, *.xls*, *.csv, *.ppt*, *.pdf, *.sql');
 	            bpowershell_import_clear($1);
 	        }
 	
